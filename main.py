@@ -51,10 +51,10 @@ async def update_book_by_id(id: int, book_schemas: BookUpdate, db: Session = Dep
 
     if not book_obj:
         raise HTTPException(status_code=403, detail=f"todo item with id {id} not found")
-    else:
-        book_obj.title = book_schemas.title
-        book_obj.rating = book_schemas.rating
-        db.commit()
+
+    book_obj.title = book_schemas.title
+    book_obj.rating = book_schemas.rating
+    db.commit()
 
     return book_obj
 
@@ -65,9 +65,9 @@ async def delete_book_by_id(id: int, db: Session = Depends(get_db)):
 
     if not book_obj:
         raise HTTPException(status_code=403, detail=f"book item with id {id} not found")
-    else:
-        db.delete(book_obj)
-        db.commit()
+
+    db.delete(book_obj)
+    db.commit()
 
     return book_obj
 
@@ -106,10 +106,10 @@ async def update_author(id: int, author_schemas: AuthorUpdate, db: Session = Dep
 
     if not author_obj:
         raise HTTPException(status_code=403, detail=f"todo item with id {id} not found")
-    else:
-        author_obj.name = author_schemas.name
-        author_obj.age = author_schemas.age
-        db.commit()
+
+    author_obj.name = author_schemas.name
+    author_obj.age = author_schemas.age
+    db.commit()
 
     return author_obj
 
@@ -120,9 +120,9 @@ async def delete_author(id: int, db: Session = Depends(get_db)):
 
     if not author_obj:
         raise HTTPException(status_code=403, detail=f"author item with id {id} not found")
-    else:
-        db.delete(author_obj)
-        db.commit()
+
+    db.delete(author_obj)
+    db.commit()
 
     return author_obj
 
