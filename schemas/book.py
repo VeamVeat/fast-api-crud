@@ -1,19 +1,16 @@
-from typing import Union
-
-from fastapi import Query
-from pydantic import BaseModel
+from typing import Optional
+from pydantic import BaseModel, Field
 
 
-class Book(BaseModel):
+class BookResponse(BaseModel):
     id: int
-    title: str
-    rating: int
-    author_id: int
+    title: str | None = Field(default=None, max_length=20)
+    rating: Optional[int]
 
     class Config:
         orm_mode = True
 
 
 class BookUpdate(BaseModel):
-    title: Union[str, None] = Query(default=None, max_length=20)
-    rating: int
+    title: str | None = Field(default=None, max_length=20)
+    rating: Optional[int]

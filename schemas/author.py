@@ -1,18 +1,23 @@
-from pydantic import BaseModel, StrictStr, Field, validator
+from typing import Optional, List
+
+from pydantic import BaseModel, Field, validator
+
+from schemas.book import BookResponse
 
 
-class Author(BaseModel):
+class AuthorResponse(BaseModel):
     id: int
-    name: str
-    age: str
+    name: str | None = Field(default=None, max_length=150)
+    age: Optional[int]
+    books: List[BookResponse] = []
 
     class Config:
         orm_mode = True
 
 
 class AuthorUpdate(BaseModel):
-    name: StrictStr = Field(min_length=1, max_length=50)
-    age: int
+    name: str | None = Field(default=None, max_length=20)
+    age: Optional[int]
 
     @validator('age')
     def age_must_be_over_18(cls, age):

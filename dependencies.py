@@ -17,3 +17,6 @@ def get_db() -> Session:
 @lru_cache
 def get_db_settings() -> config.Settings:
     return config.Settings()
+
+
+settings = get_db_settings()
