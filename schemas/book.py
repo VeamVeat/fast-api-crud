@@ -15,3 +15,8 @@ class BookResponse(BaseModel):
 class BookUpdate(BaseModel):
     title: str | None = Field(default=None, max_length=20)
     rating: Optional[int]
+
+
+class BookOptionalUpdate(BookUpdate):
+    title: Optional[str]
+    rating: Optional[int]

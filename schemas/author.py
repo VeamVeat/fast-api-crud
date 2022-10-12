@@ -24,3 +24,8 @@ class AuthorUpdate(BaseModel):
         if age < 18:
             raise ValueError(f'you are under 18')
         return age
+
+
+class AuthorOptionalUpdate(AuthorUpdate):
+    name: Optional[str] = None
+    age: Optional[int] = None

@@ -7,8 +7,8 @@ from fastapi import FastAPI
 
 from dependencies import get_db
 from middleware import MyMiddleware
-from schemas.book import BookResponse, BookUpdate
-from schemas.author import AuthorResponse, AuthorUpdate
+from schemas.book import BookResponse, BookUpdate, BookOptionalUpdate
+from schemas.author import AuthorResponse, AuthorUpdate, AuthorOptionalUpdate
 from models import Book as ModelBook
 from models import Author as ModelAuthor
 
@@ -45,6 +45,20 @@ async def create_book(book: BookUpdate, db: Session = Depends(get_db)):
 
 @app.put("/book/{id}", response_model=BookResponse)
 async def update_book_by_id(id: int, book_schema: BookUpdate, db: Session = Depends(get_db)):
+    book_obj = db.query(ModelBook).get(id)
+
+    if not book_obj:
+        raise HTTPException(status_code=404, detail=f"todo item with id {id} not found")
+
+    book_obj.title = book_schema.title
+    book_obj.rating = book_schema.rating
+    db.commit()
+
+    return book_obj
+
+
+@app.patch("/book/{id}", response_model=BookResponse)
+async def optional_update_book_by_id(id: int, book_schema: BookOptionalUpdate, db: Session = Depends(get_db)):
     book_obj = db.query(ModelBook).get(id)
 
     if not book_obj:
@@ -98,6 +112,20 @@ async def create_author(author_schema: AuthorUpdate, db: Session = Depends(get_d
 
 @app.put("/author/{id}", response_model=AuthorResponse)
 async def update_author(id: int, author_schema: AuthorUpdate, db: Session = Depends(get_db)):
+    author_obj = db.query(ModelAuthor).get(id)
+
+    if not author_obj:
+        raise HTTPException(status_code=404, detail=f"todo item with id {id} not found")
+
+    author_obj.name = author_schema.name
+    author_obj.age = author_schema.age
+    db.commit()
+
+    return author_obj
+
+
+@app.patch("/author/{id}", response_model=AuthorResponse)
+async def optional_update_author_by_id(id: int, author_schema: AuthorOptionalUpdate, db: Session = Depends(get_db)):
     author_obj = db.query(ModelAuthor).get(id)
 
     if not author_obj:
