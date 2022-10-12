@@ -14,7 +14,7 @@ from models import Author as ModelAuthor
 
 app = FastAPI()
 
-# app.add_middleware(MyMiddleware)
+app.add_middleware(MyMiddleware)
 
 
 @app.get('/book/', response_model=List[BookResponse])
@@ -64,8 +64,10 @@ async def optional_update_book_by_id(id: int, book_schema: BookOptionalUpdate, d
     if not book_obj:
         raise HTTPException(status_code=404, detail=f"todo item with id {id} not found")
 
-    book_obj.title = book_schema.title
-    book_obj.rating = book_schema.rating
+    book_data = book_schema.dict(exclude_unset=True)
+    for key, value in book_data.items():
+        setattr(book_obj, key, value)
+
     db.commit()
 
     return book_obj
@@ -131,8 +133,10 @@ async def optional_update_author_by_id(id: int, author_schema: AuthorOptionalUpd
     if not author_obj:
         raise HTTPException(status_code=404, detail=f"todo item with id {id} not found")
 
-    author_obj.name = author_schema.name
-    author_obj.age = author_schema.age
+    author_data = author_schema.dict(exclude_unset=True)
+    for key, value in author_data.items():
+        setattr(author_obj, key, value)
+
     db.commit()
 
     return author_obj
