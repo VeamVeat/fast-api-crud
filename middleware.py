@@ -1,16 +1,15 @@
 from fastapi import Request, HTTPException
+from fastapi.responses import Response
+from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 
 from dependencies import settings
 
 
-class MyMiddleware:
-
-    async def __call__(self, request: Request, call_next):
+class MyMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         authorization_header = request.headers.get("authorization")
 
         if authorization_header != settings.AUTHORIZATION:
             raise HTTPException(status_code=403, detail="Invalid authorization header specified")
 
-        response = await call_next(request)
-
-        return response
+        return await call_next(request)
