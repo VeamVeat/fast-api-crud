@@ -13,7 +13,7 @@ from database import Base
 
 
 class Book(Base):
-    __tablename__ = 'book'
+    __tablename__ = 'books'
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
     rating = Column(Float)
@@ -26,7 +26,7 @@ class Book(Base):
 
 
 class Author(Base):
-    __tablename__ = 'author'
+    __tablename__ = 'authors'
     id = Column(Integer, primary_key=True)
     name = Column(String)
     age = Column(Integer)
