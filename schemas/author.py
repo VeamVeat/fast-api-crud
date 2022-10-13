@@ -1,23 +1,23 @@
-from typing import Optional, List
+from typing import List
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, validator, PositiveInt
 
 from schemas.book import BookResponse
 
 
 class AuthorResponse(BaseModel):
-    id: int
+    id: PositiveInt
     name: str | None = Field(default=None, max_length=150)
-    age: Optional[int]
+    age: PositiveInt
     books: List[BookResponse] = []
 
     class Config:
         orm_mode = True
 
 
-class AuthorUpdate(BaseModel):
-    name: str | None = Field(default=None, max_length=20)
-    age: Optional[int]
+class _AuthorSchema(BaseModel):
+    name: str
+    age: PositiveInt
 
     @validator('age')
     def age_must_be_over_18(cls, age):
@@ -26,6 +26,26 @@ class AuthorUpdate(BaseModel):
         return age
 
 
-class AuthorOptionalUpdate(AuthorUpdate):
-    name: Optional[str] = None
-    age: Optional[int] = None
+class AuthorCreate(_AuthorSchema):
+    pass
+
+
+class AuthorPutUpdate(_AuthorSchema):
+    pass
+
+
+class AuthorPatchUpdate(_AuthorSchema):
+    name: str | None = Field(default=None, max_length=20)
+    age: PositiveInt | None
+
+
+class _ChangeCountBookToAuthor(BaseModel):
+    book_id: PositiveInt
+
+
+class AddBookToAuthor(_ChangeCountBookToAuthor):
+    pass
+
+
+class DeleteBookToAuthor(_ChangeCountBookToAuthor):
+    pass

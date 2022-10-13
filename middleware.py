@@ -1,5 +1,5 @@
-from fastapi import Request, HTTPException
-from fastapi.responses import Response
+from fastapi import Request, HTTPException, status
+from fastapi.responses import Response, JSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 
 from dependencies import settings
@@ -10,6 +10,6 @@ class MyMiddleware(BaseHTTPMiddleware):
         authorization_header = request.headers.get("authorization")
 
         if authorization_header != settings.AUTHORIZATION:
-            raise HTTPException(status_code=403, detail="Invalid authorization header specified")
+            return JSONResponse(status_code=status.HTTP_403_FORBIDDEN, content="Invalid authorization header specified")
 
         return await call_next(request)

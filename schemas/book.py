@@ -1,22 +1,29 @@
-from typing import Optional
-
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, PositiveInt
 
 
 class BookResponse(BaseModel):
-    id: int
+    id: PositiveInt
     title: str | None = Field(default=None, max_length=20)
-    rating: Optional[int]
+    rating: PositiveInt | None
 
     class Config:
         orm_mode = True
 
 
-class BookUpdate(BaseModel):
+class _BookSchema(BaseModel):
+    title: str
+    rating: PositiveInt
+
+
+class BookCreate(_BookSchema):
+    author_id: PositiveInt | None
+    pass
+
+
+class BookPutUpdate(_BookSchema):
+    pass
+
+
+class BookPatchUpdate(_BookSchema):
     title: str | None = Field(default=None, max_length=20)
-    rating: Optional[int]
-
-
-class BookOptionalUpdate(BookUpdate):
-    title: Optional[str]
-    rating: Optional[int]
+    rating: PositiveInt | None
