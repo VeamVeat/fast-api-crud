@@ -1,9 +1,9 @@
-from fastapi import APIRouter
 from typing import List
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, APIRouter
 from pydantic import PositiveInt
 from sqlalchemy.orm import Session
+
 from dependencies import get_db
 from schemas.book import BookResponse, BookPutUpdate, BookPatchUpdate, BookCreate
 from models import Book as ModelBook
