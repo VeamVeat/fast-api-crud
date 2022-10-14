@@ -19,10 +19,10 @@ class _AuthorSchema(BaseModel):
     name: str
     age: PositiveInt
 
-    @validator('age')
+    @validator("age")
     def age_must_be_over_18(cls, age):
         if age < 18:
-            raise ValueError(f'you are under 18')
+            raise ValueError(f"you are under 18")
         return age
 
 

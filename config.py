@@ -12,11 +12,15 @@ class Settings(BaseSettings):
 
     DATABASE_URL: PostgresDsn
 
-    @validator('DATABASE_URL')
+    @validator("DATABASE_URL")
     def connection_db(cls, database_url, values):
-        database_url = f"postgresql://{values.get('DB_USERNAME')}:" \
-                       f"{values.get('DB_PASSWORD')}@{values.get('DB_HOST')}:" \
-                       f"{values.get('DB_PORT')}/{values.get('DB_DATABASE')}"
+        db_username = values.get("DB_USERNAME")
+        db_password = values.get("DB_PASSWORD")
+        db_host = values.get("DB_HOST")
+        db_port = values.get("DB_PORT")
+        db_database = values.get("DB_DATABASE")
+
+        database_url = f"postgresql://{db_username}:{db_password}@{db_host}:{db_port}/{db_database}"
         return database_url
 
     class Config:
