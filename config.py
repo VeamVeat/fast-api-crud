@@ -1,4 +1,6 @@
-from pydantic import BaseSettings, PostgresDsn, validator, PositiveInt
+import os
+
+from pydantic import BaseSettings, PostgresDsn, validator, PositiveInt, Field
 
 
 class Settings(BaseSettings):
@@ -11,6 +13,7 @@ class Settings(BaseSettings):
     DB_PORT: PositiveInt
 
     DATABASE_URL: PostgresDsn
+    TEST_DATABASE_URL: str = os.getenv("TEST_DATABASE_URL")
 
     @validator("DATABASE_URL")
     def connection_db(cls, database_url, values):
