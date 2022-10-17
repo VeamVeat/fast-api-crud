@@ -5,7 +5,12 @@ from pydantic import PositiveInt
 from sqlalchemy.orm import Session
 
 from dependencies import get_db
-from schemas.book import BookResponse, BookPutUpdate, BookPatchUpdate, BookCreate
+from schemas.book import (
+    BookResponse,
+    BookPutUpdate,
+    BookPatchUpdate,
+    BookCreate
+)
 from models import Book as ModelBook
 
 router = APIRouter(
@@ -24,7 +29,10 @@ async def get_book_by_id(book_id: PositiveInt, db: Session = Depends(get_db)):
     book_obj = db.query(ModelBook).get(book_id)
 
     if book_obj is None:
-        raise HTTPException(status_code=404, detail=f"book item with id {book_id} not found")
+        raise HTTPException(
+            status_code=404,
+            detail=f"book item with id {book_id} not found"
+        )
 
     return book_obj
 
@@ -44,7 +52,10 @@ async def update_book_by_id(book_id: PositiveInt, book_data: BookPutUpdate, db: 
     book_obj = db.query(ModelBook).get(book_id)
 
     if book_obj is None:
-        raise HTTPException(status_code=404, detail=f"book item with id {id} not found")
+        raise HTTPException(
+            status_code=404,
+            detail=f"book item with id {book_id} not found"
+        )
 
     book_data = book_data.dict()
     for key, value in book_data.items():
@@ -60,7 +71,10 @@ async def optional_update_book_by_id(book_id: PositiveInt, book_data: BookPatchU
     book_obj = db.query(ModelBook).get(book_id)
 
     if book_obj is None:
-        raise HTTPException(status_code=404, detail=f"book item with id {book_id} not found")
+        raise HTTPException(
+            status_code=404,
+            detail=f"book item with id {book_id} not found"
+        )
 
     book_data = book_data.dict(exclude_unset=True)
     for key, value in book_data.items():
@@ -76,7 +90,10 @@ async def delete_book_by_id(book_id: PositiveInt, db: Session = Depends(get_db))
     book_obj = db.query(ModelBook).get(book_id)
 
     if book_obj is None:
-        raise HTTPException(status_code=404, detail=f"book item with id {book_id} not found")
+        raise HTTPException(
+            status_code=404,
+            detail=f"book item with id {book_id} not found"
+        )
 
     db.delete(book_obj)
     db.commit()

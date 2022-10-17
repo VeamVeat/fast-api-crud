@@ -6,8 +6,8 @@ import config
 
 
 def get_db() -> Session:
-    import database
-    db = database.SessionLocal()
+    from database import SessionLocal
+    db = SessionLocal()
     try:
         yield db
     finally:
