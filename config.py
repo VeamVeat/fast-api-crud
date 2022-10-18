@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     DB_DATABASE: str
     DB_HOST: str
     DB_PORT: PositiveInt
+
     DATABASE_URL: PostgresDsn
 
     # testing data from crud author
