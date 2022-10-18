@@ -10,8 +10,7 @@ from schemas.author import (
     AuthorPutUpdate,
     AuthorPatchUpdate,
     AuthorCreate,
-    AddBookToAuthor,
-    DeleteBookToAuthor
+    AddBookToAuthor
 )
 from models import Book as ModelBook
 from models import Author as ModelAuthor

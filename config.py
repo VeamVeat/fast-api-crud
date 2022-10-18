@@ -19,21 +19,21 @@ class Settings(BaseSettings):
     DB_PORT: PositiveInt
     DATABASE_URL: PostgresDsn
 
-    TEST_DATABASE_URL: str = os.getenv("TEST_DATABASE_URL")
-
     # testing data from crud author
-    TEST_AUTHOR_ID = PositiveInt
-    TEST_NAME_AUTHOR = str
-    TEST_AGE_AUTHOR = PositiveInt
-    TEST_UPDATE_NAME_AUTHOR = str
-    TEST_UPDATE_AGE_AUTHOR = PositiveInt
+    TEST_AUTHOR_ID: PositiveInt
+    TEST_NAME_AUTHOR: str
+    TEST_AGE_AUTHOR: PositiveInt
+    TEST_UPDATE_NAME_AUTHOR: str
+    TEST_UPDATE_AGE_AUTHOR: PositiveInt
 
     # testing data from crud book
-    TEST_BOOK_ID = PositiveInt
-    TEST_TITLE_BOOK = str
-    TEST_RATING_BOOK = PositiveInt
-    TEST_UPDATE_TITLE_BOOK = str
-    TEST_UPDATE_RATING_BOOK = PositiveInt
+    TEST_BOOK_ID: PositiveInt
+    TEST_TITLE_BOOK: str
+    TEST_RATING_BOOK: PositiveInt
+    TEST_UPDATE_TITLE_BOOK: str
+    TEST_UPDATE_RATING_BOOK: PositiveInt
+
+    TEST_DATABASE_URL: str = os.getenv("TEST_DATABASE_URL")
 
     @validator("DATABASE_URL")
     def connection_db(cls, database_url, values):
