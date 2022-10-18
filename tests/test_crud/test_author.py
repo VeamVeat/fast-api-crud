@@ -70,7 +70,6 @@ class TestAuthor:
         assert books.get("rating") == settings.TEST_RATING_BOOK
 
     def test_delete_author_by_id(self, client, create_author):
-        author_id = settings.TEST_AUTHOR_ID
-        response = client.delete(f"/author/{author_id}")
+        response = client.delete(f"/author/1")
 
         assert response.status_code == status.HTTP_200_OK

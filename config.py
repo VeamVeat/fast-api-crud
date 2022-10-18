@@ -21,14 +21,12 @@ class Settings(BaseSettings):
     DATABASE_URL: PostgresDsn
 
     # testing data from crud author
-    TEST_AUTHOR_ID: PositiveInt
     TEST_NAME_AUTHOR: str
     TEST_AGE_AUTHOR: PositiveInt
     TEST_UPDATE_NAME_AUTHOR: str
     TEST_UPDATE_AGE_AUTHOR: PositiveInt
 
     # testing data from crud book
-    TEST_BOOK_ID: PositiveInt
     TEST_TITLE_BOOK: str
     TEST_RATING_BOOK: PositiveInt
     TEST_UPDATE_TITLE_BOOK: str

@@ -56,7 +56,6 @@ class TestBook:
         assert content.get("rating") == settings.TEST_RATING_BOOK
 
     def test_delete_book_by_id(self, client, create_book):
-        book_id = settings.TEST_BOOK_ID
-        response = client.delete(f"/book/{book_id}")
+        response = client.delete(f"/book/1")
 
         assert response.status_code == status.HTTP_200_OK
