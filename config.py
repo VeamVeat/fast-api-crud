@@ -1,6 +1,6 @@
 import os
 
-from pydantic import BaseSettings, PostgresDsn, validator, PositiveInt, Field
+from pydantic import BaseSettings, PostgresDsn, validator, PositiveInt
 
 
 class Settings(BaseSettings):
@@ -27,5 +27,5 @@ class Settings(BaseSettings):
         return database_url
 
     class Config:
-        env_file = ".env"
+        env_file = "env_project/.env"
         env_file_encoding = "utf-8"
