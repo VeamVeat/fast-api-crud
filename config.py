@@ -6,6 +6,7 @@ from pydantic import (
     validator,
     PositiveInt
 )
+from pydantic.tools import lru_cache
 
 
 class Settings(BaseSettings):
@@ -46,5 +47,13 @@ class Settings(BaseSettings):
         return database_url
 
     class Config:
-        env_file = ".env"
+        env_file = "env_project/.env"
         env_file_encoding = "utf-8"
+
+
+@lru_cache
+def get_db_settings() -> Settings:
+    return Settings()
+
+
+settings = get_db_settings()

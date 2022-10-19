@@ -6,6 +6,7 @@ from starlette.testclient import TestClient
 
 from database import Base
 from dependencies import get_db
+from middleware import MyMiddleware
 from routers import authors, books
 from tests.utils.test_settings_database import SessionTesting, engine
 
@@ -14,7 +15,7 @@ def start_application():
     app = FastAPI()
     app.include_router(authors.router)
     app.include_router(books.router)
-    # app.add_middleware(MyMiddleware)
+    app.add_middleware(MyMiddleware)
     return app
 
 
@@ -33,11 +34,10 @@ def client(
 ) -> Generator[TestClient, Any, None]:
 
     def _get_test_db():
-        try:
-            yield db_session
-        finally:
-            pass
+        yield db_session
 
     app.dependency_overrides[get_db] = _get_test_db
+
     with TestClient(app) as client:
+        client.headers = {"Authorization": "w2x7m_grd7m42k7(2@_^tv*pll^-l&242-@*d_b*pzs6-vy@-"}
         yield client

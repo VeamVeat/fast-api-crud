@@ -2,7 +2,7 @@ import json
 
 from starlette import status
 
-from dependencies import settings
+from config import settings
 
 
 class TestBook:

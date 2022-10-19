@@ -1,6 +1,6 @@
 import pytest
 
-from dependencies import settings
+from config import settings
 
 
 @pytest.fixture()

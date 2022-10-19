@@ -5,7 +5,7 @@ from schemas.author import AuthorCreate
 from schemas.book import BookCreate
 from tests import fixtures
 from tests.helpers.walk_packages import get_package_paths_in_module
-from dependencies import settings
+from config import settings
 from tests.test_services import TestBaseService
 from tests.utils.test_settings_database import SessionTesting
 
