@@ -2,7 +2,7 @@ from fastapi import Request, status
 from fastapi.responses import Response, JSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 
-from dependencies import settings
+from config import settings
 
 
 class MyMiddleware(BaseHTTPMiddleware):

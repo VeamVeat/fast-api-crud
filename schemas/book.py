@@ -10,6 +10,10 @@ class BookResponse(BaseModel):
         orm_mode = True
 
 
+class BookDelete(BaseModel):
+    book_id: PositiveInt
+
+
 class _BookSchema(BaseModel):
     title: str
     rating: PositiveInt
@@ -17,7 +21,6 @@ class _BookSchema(BaseModel):
 
 class BookCreate(_BookSchema):
     author_id: PositiveInt | None
-    pass
 
 
 class BookPutUpdate(_BookSchema):

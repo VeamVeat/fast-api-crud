@@ -50,7 +50,6 @@ cd env/bin
 source activate
 cd ../.. && cd fast_api_crud
 pip install -r requirements.txt
-alembic revision --autogenerate -m "new mirgate"
 alembic upgrade head
 ```
 
