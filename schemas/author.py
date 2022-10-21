@@ -36,7 +36,7 @@ class AuthorPutUpdate(_AuthorSchema):
 
 class AuthorPatchUpdate(_AuthorSchema):
     name: str | None = Field(default=None, max_length=20)
-    age: PositiveInt | None
+    age: PositiveInt | None = Field(default=None)
 
 
 class _ChangeCountBookToAuthor(BaseModel):

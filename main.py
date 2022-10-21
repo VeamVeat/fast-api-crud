@@ -8,7 +8,6 @@ from routers import books
 
 
 app = FastAPI()
-
 app.include_router(authors.router)
 app.include_router(books.router)
 app.add_middleware(MyMiddleware)
