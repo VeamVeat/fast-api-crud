@@ -10,11 +10,9 @@ RUN apt-get update && \
     apt-get install postgresql gcc python3-dev musl-dev -y && \
     pip install --upgrade pip
 
-COPY ./requirements.txt .
+COPY . .
 
 RUN pip install -r requirements.txt
-
-COPY . .
 
 RUN ["chmod", "+x", "/fast_api_crud/entrypoint.sh"]
 

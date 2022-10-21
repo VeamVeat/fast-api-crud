@@ -60,3 +60,5 @@ prune-container:
 
 migrate:
 	$(DC) $(DC_NAME) exec $(NAME_CONTAINER) $(MIGRATE)
+
+setup: build up migrate
