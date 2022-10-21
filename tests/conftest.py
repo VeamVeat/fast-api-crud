@@ -12,7 +12,7 @@ from tests.utils.test_settings_database import SessionTesting
 pytest_plugins = [*get_package_paths_in_module(fixtures)]
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def create_author(db_session: SessionTesting):
     author_schema = AuthorCreate(
         name=settings.TEST_NAME_AUTHOR,
@@ -23,7 +23,7 @@ def create_author(db_session: SessionTesting):
     return author_obj
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def create_book(db_session: SessionTesting):
     book_schema = BookCreate(
         title=settings.TEST_TITLE_BOOK,

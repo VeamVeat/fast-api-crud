@@ -19,7 +19,7 @@ def start_application():
     return app
 
 
-@pytest.fixture()
+@pytest.fixture(scope="class")
 def app() -> Generator[FastAPI, Any, None]:
 
     Base.metadata.create_all(engine)
@@ -28,7 +28,7 @@ def app() -> Generator[FastAPI, Any, None]:
     Base.metadata.drop_all(engine)
 
 
-@pytest.fixture()
+@pytest.fixture(scope="class")
 def client(
         app: FastAPI, db_session: SessionTesting
 ) -> Generator[TestClient, Any, None]:
