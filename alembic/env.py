@@ -10,7 +10,7 @@ from sqlalchemy import pool
 import models
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-load_dotenv(os.path.join(BASE_DIR, ".env"))
+load_dotenv(os.path.join(BASE_DIR, "env_project/.env"))
 sys.path.append(BASE_DIR)
 
 # this is the Alembic Config object, which provides
