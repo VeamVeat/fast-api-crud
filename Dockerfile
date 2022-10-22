@@ -12,7 +12,7 @@ RUN apt-get update && \
 
 COPY . .
 
-RUN pip install -r requirements.txt
+RUN pip install -r /fast_api_crud/requirements.txt
 
 RUN ["chmod", "+x", "/fast_api_crud/entrypoint.sh"]
 
