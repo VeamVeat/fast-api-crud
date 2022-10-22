@@ -8,7 +8,8 @@
 * [Используемые технологии](#используемые-технологие)
 * [Используемые базы данных](#используемые-базы-данных)
 * [Функции API](#функции-api)
-* [Настройка и запуск проекта](#настройка-и-запуск-проекта)
+* [Настройка и запуск проекта на локальной машине](#настройка-и-запуск-проекта-на-локальной-машине)
+* [Настройка и запуск проекта в докер контейнере](#настройка-и-запуск-проекта-в-докер-контейнере)
 
 ## Общее
 - API для crud операций
@@ -39,7 +40,7 @@
 - http://0.0.0.0:8000/book/{book_id} -> частично изменить данные о книге (patch)
 - http://0.0.0.0:8000/book/ -> создать новую книгу (post)
 
-## Настройка и запуск проекта
+## Настройка и запуск проекта на локальной машине
 Для начала склонируйте репозиторий и установить зависимости
 
 `git clone https://github.com/VeamVeat/fast_api_crud.git`
@@ -50,8 +51,40 @@ cd env/bin
 source activate
 cd ../.. && cd fast_api_crud
 pip install -r requirements.txt
+
+sudo -u postgres psql
+create database fast_api_crud;
+create user username with encrypted password 'password';
+grant all privileges on database fast_api_crud to username;
+
 alembic upgrade head
+pytest (удостовериться что все тесты прошли успешно)
+```
+![](../../../../Изображения/Снимки экрана/Снимок экрана от 2022-10-22 14-49-47.png)
+
+```
+`uvicorn main:app --reload`
 ```
 
-#### Для локального запуска
-`uvicorn main:app --reload`
+## Настройка и запуск проекта в докер контейнере
+Для начала склонируйте репозиторий и установить зависимости
+
+`git clone https://github.com/VeamVeat/fast_api_crud.git`
+
+```Python
+python3.10 -m venv env
+cd env/bin
+source activate
+cd ../.. && cd fast_api_crud
+pip install -r requirements.txt
+
+make setup
+
+#В отдельном терминале 
+cd fast_api_crud (зайти в папку с проектом)
+make login
+alembic upgrade head
+pytest (удостовериться что все тесты прошли успешно)
+```
+
+![](../../../../Изображения/Снимки экрана/Снимок экрана от 2022-10-22 14-49-47.png)
