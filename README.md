@@ -60,7 +60,8 @@ grant all privileges on database fast_api_crud to username;
 alembic upgrade head
 pytest (удостовериться что все тесты прошли успешно)
 ```
-
+![Снимок экрана от 2022-10-22 15-09-23](https://user-images.githubusercontent.com/67123448/197338305-23148b3e-9e2e-465e-ae90-7ce3cea84151.png)
+ 
 ```
 `uvicorn main:app --reload`
 ```
@@ -85,3 +86,5 @@ make login
 alembic upgrade head
 pytest (удостовериться что все тесты прошли успешно)
 ```
+![Снимок экрана от 2022-10-22 14-49-47](https://user-images.githubusercontent.com/67123448/197338206-3eb444ea-54b2-4273-b1d4-4c755d3eef4c.png)
+
