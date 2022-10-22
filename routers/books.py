@@ -14,12 +14,12 @@ from schemas.book import (
 from models import Book as ModelBook
 
 router = APIRouter(
-    prefix="/book",
+    prefix="/books",
     tags=["books"],
 )
 
 
-@router.get("/all", response_model=List[BookResponse])
+@router.get("/", response_model=List[BookResponse])
 async def get_books(db: Session = Depends(get_db)):
     return db.query(ModelBook).all()
 

@@ -16,12 +16,12 @@ from models import Book as ModelBook
 from models import Author as ModelAuthor
 
 router = APIRouter(
-    prefix="/author",
+    prefix="/authors",
     tags=["authors"],
 )
 
 
-@router.get("/all", response_model=List[AuthorResponse])
+@router.get("/", response_model=List[AuthorResponse])
 async def get_authors(db: Session = Depends(get_db)):
     return db.query(ModelAuthor).all()
 
